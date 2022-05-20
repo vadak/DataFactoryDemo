@@ -1,0 +1,18 @@
+{
+	"name": "trigger1",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/vikdatafactorydemoinputfiles/blobs/",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/53fd48f8-99e9-459a-b2e6-5ad2107995bf/resourceGroups/DataFactoryDemo/providers/Microsoft.Storage/storageAccounts/vikdatafactorydemo",
+			"events": [
+				"Microsoft.Storage.BlobCreated",
+				"Microsoft.Storage.BlobDeleted"
+			]
+		}
+	}
+}

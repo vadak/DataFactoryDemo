@@ -1,0 +1,43 @@
+{
+	"name": "FileDropTrigger",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "CSV_To_SQL",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "CSV_To_SQL",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "CSV_To_SQL_Notify",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "CSV_to_SQL_datafixed",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/vikdatafactorydemoinputfiles/blobs/",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/53fd48f8-99e9-459a-b2e6-5ad2107995bf/resourceGroups/DataFactoryDemo/providers/Microsoft.Storage/storageAccounts/vikdatafactorydemo",
+			"events": [
+				"Microsoft.Storage.BlobCreated",
+				"Microsoft.Storage.BlobDeleted"
+			]
+		}
+	}
+}

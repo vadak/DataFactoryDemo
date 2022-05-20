@@ -1,0 +1,302 @@
+{
+	"name": "API_To_SQL",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Web1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET",
+						"paginationRules": {
+							"supportRFC5988": "true"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "upsert",
+						"upsertSettings": {
+							"useTempDB": true,
+							"keys": [
+								"Id"
+							]
+						},
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['Type']"
+								},
+								"sink": {
+									"name": "Type",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Background']"
+								},
+								"sink": {
+									"name": "Background",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['CanVote']"
+								},
+								"sink": {
+									"name": "CanVote",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Constituency']"
+								},
+								"sink": {
+									"name": "Constituency",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ConstituencyId']"
+								},
+								"sink": {
+									"name": "ConstituencyId",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Currency']"
+								},
+								"sink": {
+									"name": "Currency",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Email']"
+								},
+								"sink": {
+									"name": "Email",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['EmailPattern']"
+								},
+								"sink": {
+									"name": "EmailPattern",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['EstablishedIn']"
+								},
+								"sink": {
+									"name": "EstablishedIn",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Fax']"
+								},
+								"sink": {
+									"name": "Fax",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Id']"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['StartDate']"
+								},
+								"sink": {
+									"name": "StartDate",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['EndDate']"
+								},
+								"sink": {
+									"name": "EndDate",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MainOfficeId']"
+								},
+								"sink": {
+									"name": "MainOfficeId",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Name']"
+								},
+								"sink": {
+									"name": "Name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['NationalRanking']"
+								},
+								"sink": {
+									"name": "NationalRanking",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Phone']"
+								},
+								"sink": {
+									"name": "Phone",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Region']"
+								},
+								"sink": {
+									"name": "Region",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['RegionId']"
+								},
+								"sink": {
+									"name": "RegionId",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Website']"
+								},
+								"sink": {
+									"name": "Website",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ParentId']"
+								},
+								"sink": {
+									"name": "ParentId",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['IsVisible']"
+								},
+								"sink": {
+									"name": "IsVisible",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "RestResource1",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSqlTable1",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://api.bdo.global/masterdata/v2/memberFirms",
+					"method": "GET",
+					"headers": {
+						"Ocp-Apim-Subscription-Key": "4e746a5606654e358aedb81936f2771f"
+					},
+					"linkedServices": [
+						{
+							"referenceName": "RestService1",
+							"type": "LinkedServiceReference"
+						}
+					],
+					"datasets": [
+						{
+							"referenceName": "RestResource1",
+							"type": "DatasetReference"
+						}
+					],
+					"disableCertValidation": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-05-19T20:04:46Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

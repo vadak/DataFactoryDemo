@@ -1,0 +1,9 @@
+{
+	"name": "VikDataFactoryDemo",
+	"location": "australiasoutheast",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "385316db-0d7c-447a-8216-342d3cef8ce6",
+		"tenantId": "b938b10c-b509-4b5e-b5f8-84eff4d4c665"
+	}
+}
